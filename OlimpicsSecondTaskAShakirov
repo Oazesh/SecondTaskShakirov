@@ -1,0 +1,56 @@
+namespace Library
+{
+    public class BMIResult
+    {
+        public double BMI { get; set; }
+        public string Description { get; set; }
+
+        public static BMIResult CalculateBMI(double heightInMeters, double weightInKilograms)
+        {
+            if (heightInMeters <= 0 || weightInKilograms <= 0)
+            {
+                throw new ArgumentException("Значения роста и веса должны быть положительными.");
+            }
+
+            double bmi = weightInKilograms / (heightInMeters * heightInMeters);
+
+            string description;
+            if (bmi < 18.5)
+            {
+                description = "Недостаточный вес";
+            }
+            else if (bmi < 25)
+            {
+                description = "Нормальный вес";
+            }
+            else if (bmi < 30)
+            {
+                description = "Избыточный вес";
+            }
+            else
+            {
+                description = "Ожирение";
+            }
+
+            return new BMIResult
+            {
+                BMI = bmi,
+                Description = description
+            };
+        }
+    }
+
+    public class Programm
+    {
+        static void Main(string[] args)
+        {
+            BMIResult.CalculateBMI(170, 55);
+        }
+    }
+}
+
+/*
+Этот код определяет два класса в пространстве имен "Library": "BMIResult" и "Programm". Класс "BMIResult" содержит метод "CalculateBMI", который принимает два параметра - рост в метрах и вес в килограммах - и вычисляет индекс массы тела (ИМТ) по формуле BMI = вес / (рост * рост). Затем метод определяет категорию веса на основе значения ИМТ и возвращает объект класса "BMIResult", содержащий значение ИМТ и соответствующую категорию веса.
+
+Класс "Programm" содержит метод "Main", который вызывает метод "CalculateBMI" класса "BMIResult" с заданными значениями роста и веса. Однако, результат этого вызова не сохраняется или используется далее, поэтому программа просто вычисляет и печатает результат в консоль.
+*/
